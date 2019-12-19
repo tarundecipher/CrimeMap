@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Crime And Emergencies</title>
+    <link rel = 'stylesheet' href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 50%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .jumbotron{
+          height: 30%;
+          margin-bottom: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+      
+        <div class="jumbotron container jumbotron-fluid" style="text-align: center;">
+                <div class="container">
+                  <h1 class="font-weight-normal">Real Time Crime And Emergencies(Prototype)</h1>
+                  <p class="font-weight-normal">This map shows the real time crime scenes updated by people </p>
+                </div>
+              </div>
+            
+    <div id="map" class = "container"></div>
+
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: 20.5937, lng: 78.9629}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+      var locations = [
+        {lat: 11.059821, lng: 78.387451},
+        {lat: 17.123184, lng: 78.387451},
+        {lat: 23.473324, lng: 77.947998},
+        {lat: 29.238478, lng: 76.431885},
+        {lat: 21.295132, lng: 81.828232},
+        {lat: 29.065773, lng: 76.040497},
+        {lat: 25.794033, lng: 78.116531},
+        {lat: 25.794033, lng: 76.040497},
+        
+      ]
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUKEY&callback=initMap">
+    </script>
+    <br>
+    <div class ="container">
+    <button type="button" class="btn btn-danger ">Post Your Location</button>
+</div>
+  </body>
+</html>
